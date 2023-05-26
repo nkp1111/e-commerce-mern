@@ -16,12 +16,23 @@ const seedProducts = async () => {
     console.log("products created")
   } catch (error) {
     console.log(error)
+  }
+}
+
+/**
+ * @desc Starts a new seeding process
+ */
+const startSeeding = async () => {
+  try {
+    // connect to the database
+    await connectDatabase()
+    // seed the database with dummy data
+    await seedProducts()
+  } catch (error) {
+    console.log(error)
+  } finally {
     process.exit(1)
   }
 }
 
-// connect to the database
-connectDatabase().then(() => {
-  // seed the database with dummy data
-  seedProducts()
-})
+startSeeding()
