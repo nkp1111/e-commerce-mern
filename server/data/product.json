@@ -1,0 +1,25 @@
+[
+  {
+    "name": "John",
+    "price": 50,
+    "description": "Lorem Ipsum, Lorem Ipsum held this value for years and Lorem Ipsum, Lorem Ipsum held another value for years and Lore",
+    "ratings": 4,
+    "category": "Sports",
+    "seller": "Ebay",
+    "stock": 5,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1507349147515-313333333333?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+        "public_id": "1507349147515-313333333333"
+      }
+    ],
+    "numOfReviews": 1,
+    "reviews": [
+      {
+        "name": "John",
+        "rating": 4,
+        "comment": "Lorem Ipsum, Lorem Ipsum held this value for years and Lorem Ipsum, Lorem Ipsum held another value for years and Lore"
+      }
+    ]
+  }
+]
