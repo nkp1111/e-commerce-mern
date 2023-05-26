@@ -1,24 +1,228 @@
 [
   {
-    "name": "John",
-    "price": 50,
-    "description": "Lorem Ipsum, Lorem Ipsum held this value for years and Lorem Ipsum, Lorem Ipsum held another value for years and Lore",
-    "ratings": 4,
-    "category": "Sports",
-    "seller": "Ebay",
-    "stock": 5,
+    "name": "Apple iPhone 12",
+    "price": 999.99,
+    "description": "The Apple iPhone 12 is a powerful and stylish smartphone.",
+    "ratings": 4.5,
     "images": [
       {
-        "url": "https://images.unsplash.com/photo-1507349147515-313333333333?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-        "public_id": "1507349147515-313333333333"
+        "public_id": "12345",
+        "url": "https://source.unsplash.com/random/?iphone"
       }
     ],
+    "category": "Electronics",
+    "seller": "Apple",
+    "stock": 100,
+    "numOfReviews": 2,
+    "reviews": [
+      {
+        "name": "John Doe",
+        "rating": 4,
+        "comment": "Great phone with excellent camera quality!",
+        "date": "2023-05-25T09:30:00.000Z"
+      },
+      {
+        "name": "Jane Smith",
+        "rating": 5,
+        "comment": "The performance is outstanding. Highly recommended!",
+        "date": "2023-05-24T15:45:00.000Z"
+      }
+    ]
+  },
+  {
+    "name": "Samsung 4K Smart TV",
+    "price": 1499.99,
+    "description": "Experience immersive entertainment with the Samsung 4K Smart TV.",
+    "ratings": 4.2,
+    "images": [
+      {
+        "public_id": "67890",
+        "url": "https://source.unsplash.com/random/?samsungtv"
+      }
+    ],
+    "category": "Electronics",
+    "seller": "Samsung",
+    "stock": 50,
     "numOfReviews": 1,
     "reviews": [
       {
-        "name": "John",
+        "name": "David Brown",
         "rating": 4,
-        "comment": "Lorem Ipsum, Lorem Ipsum held this value for years and Lorem Ipsum, Lorem Ipsum held another value for years and Lore"
+        "comment": "Impressive picture quality and smart features.",
+        "date": "2023-05-23T18:20:00.000Z"
+      }
+    ]
+  },
+  {
+    "name": "Leather Sofa",
+    "price": 799.99,
+    "description": "Add elegance and comfort to your living room with this leather sofa.",
+    "ratings": 4.8,
+    "images": [
+      {
+        "public_id": "24680",
+        "url": "https://source.unsplash.com/random/?leathersofa"
+      }
+    ],
+    "category": "Furniture",
+    "seller": "Furniture Co.",
+    "stock": 10,
+    "numOfReviews": 3,
+    "reviews": [
+      {
+        "name": "Emily Johnson",
+        "rating": 5,
+        "comment": "Luxurious and well-built sofa. Absolutely love it!",
+        "date": "2023-05-26T09:30:00.000Z"
+      },
+      {
+        "name": "Mark Wilson",
+        "rating": 4,
+        "comment": "Good quality and comfortable seating.",
+        "date": "2023-05-25T15:45:00.000Z"
+      },
+      {
+        "name": "Sarah Thompson",
+        "rating": 5,
+        "comment": "Beautiful design and excellent craftsmanship.",
+        "date": "2023-05-24T11:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "name": "Nike Air Max Sneakers",
+    "price": 129.99,
+    "description": "Stay comfortable and stylish with Nike Air Max Sneakers.",
+    "ratings": 4.6,
+    "images": [
+      {
+        "public_id": "13579",
+        "url": "https://source.unsplash.com/random/?nikeairmax"
+      }
+    ],
+    "category": "Sports",
+    "seller": "Nike",
+    "stock": 75,
+    "numOfReviews": 2,
+    "reviews": [
+      {
+        "name": "Michael Lee",
+        "rating": 5,
+        "comment": "Great shoes for running and everyday wear.",
+        "date": "2023-05-25T10:15:00.000Z"
+      },
+      {
+        "name": "Michelle Brown",
+        "rating": 4,
+        "comment": "Comfortable and stylish. I love these sneakers!",
+        "date": "2023-05-23T14:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "name": "Amazon Echo Dot",
+    "price": 49.99,
+    "description": "The Amazon Echo Dot is a smart speaker powered by Alexa.",
+    "ratings": 4.0,
+    "images": [
+      {
+        "public_id": "24680",
+        "url": "https://source.unsplash.com/random/?amazonechodot"
+      }
+    ],
+    "category": "Electronics",
+    "seller": "Amazon",
+    "stock": 200,
+    "numOfReviews": 0,
+    "reviews": []
+  },
+  {
+    "name": "Canon EOS Rebel T7i",
+    "price": 899.99,
+    "description": "Capture stunning photos and videos with the Canon EOS Rebel T7i.",
+    "ratings": 4.7,
+    "images": [
+      {
+        "public_id": "35791",
+        "url": "https://source.unsplash.com/random/?canonrebelt"
+      }
+    ],
+    "category": "Electronics",
+    "seller": "Canon",
+    "stock": 15,
+    "numOfReviews": 1,
+    "reviews": [
+      {
+        "name": "Jennifer Davis",
+        "rating": 5,
+        "comment": "Excellent camera for beginners and enthusiasts.",
+        "date": "2023-05-25T14:20:00.000Z"
+      }
+    ]
+  },
+  {
+    "name": "Wooden Dining Table",
+    "price": 699.99,
+    "description": "Gather around this beautiful wooden dining table for family meals.",
+    "ratings": 4.9,
+    "images": [
+      {
+        "public_id": "46802",
+        "url": "https://source.unsplash.com/random/?woodendiningtable"
+      }
+    ],
+    "category": "Furniture",
+    "seller": "Home Furnishings",
+    "stock": 5,
+    "numOfReviews": 2,
+    "reviews": [
+      {
+        "name": "Daniel Clark",
+        "rating": 5,
+        "comment": "High-quality craftsmanship and elegant design.",
+        "date": "2023-05-25T16:10:00.000Z"
+      },
+      {
+        "name": "Laura Rodriguez",
+        "rating": 4,
+        "comment": "The table exceeded my expectations. Love it!",
+        "date": "2023-05-24T13:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "name": "Adidas Ultraboost Shoes",
+    "price": 179.99,
+    "description": "Experience unmatched comfort with Adidas Ultraboost Shoes.",
+    "ratings": 4.5,
+    "images": [
+      {
+        "public_id": "57931",
+        "url": "https://source.unsplash.com/random/?adidas"
+      },
+      {
+        "public_id": "57931",
+        "url": "https://source.unsplash.com/random/?adidas&2"
+      },
+      {
+        "public_id": "57931",
+        "url": "https://source.unsplash.com/random/?adidas&3"
+      },
+      {
+        "public_id": "57931",
+        "url": "https://source.unsplash.com/random/?adidas&4"
+      }
+    ],
+    "category": "Sports",
+    "seller": "Adidas",
+    "stock": 30,
+    "numOfReviews": 1,
+    "reviews": [
+      {
+        "name": "Robert Anderson",
+        "rating": 4,
+        "comment": "Great shoes for running. Very comfortable!",
+        "date": "2023-05-25T08:50:00.000Z"
       }
     ]
   }

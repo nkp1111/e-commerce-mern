@@ -16,9 +16,11 @@ exports.newProduct = async (req, res, next) => {
 /**
  * @method GET /api/v1/products/
  */
-exports.getProducts = (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    message: "This is first route"
-  })
+exports.getProducts = async (req, res, next) => {
+  try {
+    const products = await Product.find()
+    res.status(200).json({ success: true, products })
+  } catch (error) {
+    console.log(error)
+  }
 }
