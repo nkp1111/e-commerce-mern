@@ -2,7 +2,7 @@ const User = require("../models/user")
 
 const ErrorHandler = require("../utils/errorHandler")
 const catchAsync = require("../middleware/catchAsync")
-
+const sendToken = require("../utils/jwtToken")
 
 /**
  * @desc Registers a user on database 
@@ -25,9 +25,7 @@ exports.registerUser = catchAsync(async (req, res, next) => {
     }
   })
 
-  // get jwt token 
-  const token = user.getJwtToken()
-  res.status(200).json({ success: true, token })
+  sendToken(user, 200, res)
 })
 
 /**
@@ -55,6 +53,17 @@ exports.loginUser = catchAsync(async (req, res, next) => {
     return next(new ErrorHandler("Invalid username or password", 401))
   }
 
-  const token = user.getJwtToken()
-  res.status(200).json({ success: true, token })
+  sendToken(user, 200, res)
+})
+
+/**
+ * @desc Lout out user by clearing cookies
+ */
+exports.logoutUser = catchAsync(async (req, res, next) => {
+  res.cookie("token", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true
+  })
+
+  res.status(200).json({ success: true, message: "Successfully Logged Out" })
 })
