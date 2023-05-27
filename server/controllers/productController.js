@@ -2,7 +2,7 @@ const Product = require("../models/product")
 
 const ErrorHandler = require("../utils/errorHandler")
 const catchAsync = require("../middleware/catchAsync")
-
+const APIFeatures = require("../utils/apiFeatures")
 
 /**
  * @method POST /api/v1/product/new
@@ -14,11 +14,13 @@ exports.newProduct = catchAsync(async (req, res, next) => {
 })
 
 /**
- * @method GET /api/v1/products/
+ * @method GET /api/v1/products?keyword=value
  * @desc Get all products
+ * @param {String} keyword
  */
 exports.getProducts = catchAsync(async (req, res, next) => {
-  const products = await Product.find()
+  const apiFeature = new APIFeatures(Product, req.query)
+  const products = await apiFeature.search()
   res.status(200).json({ success: true, products })
 })
 
