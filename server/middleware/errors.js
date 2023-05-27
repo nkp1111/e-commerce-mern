@@ -1,11 +1,33 @@
-module.exports = (err, req, res, next) => {
-  if (!err.statusCode) {
-    err.statusCode = 500
-  }
+const ErrorHandler = require("../utils/errorHandler")
 
-  res.status(err.statusCode).json({
-    success: false,
-    message: err.message || "Internal Server Error",
-    stack: process.env.NODE_ENV === "production" ? null : err.stack
-  })
+module.exports = (err, req, res, next) => {
+
+  if (process.env.NODE_ENV === "development") {
+    res.status(err.statusCode || 500).json({
+      success: false,
+      message: err.message || "Internal Server Error",
+      stack: err,
+    })
+  }
+  else {
+    let error = { ...err }
+    error.message = err.message || "Internal Server Error"
+
+    // handling mongoose cast error
+    if (err.name === "CastError") {
+      const message = `Resource not found: ${err.path}`
+      error = new ErrorHandler(message, 400)
+    }
+
+    // handling mongoose validation error
+    if (err.name === "ValidationError") {
+      const message = Object.values(err.errors).map(value => value.message)
+      error = new ErrorHandler(message, 400)
+    }
+
+    res.status(error.statusCode || 500).json({
+      success: false,
+      message: error.message || "Internal Server Error",
+    })
+  }
 }
