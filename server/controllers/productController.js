@@ -14,7 +14,7 @@ exports.newProduct = catchAsync(async (req, res, next) => {
 })
 
 /**
- * @method GET /api/v1/products?keyword=value&field[lte]=value
+ * @method GET /api/v1/products?keyword=value&field[lte]=value&page=1
  * @desc Get all products
  * @param {String} keyword -search: keyword to search for items
  * @param {String/Integer} fields -filter: fields to filter

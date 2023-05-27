@@ -1,5 +1,5 @@
 class APIFeatures {
-  // query is list of documents
+  // query is cursor object of mongoose documents
   // queryStr is a request query object
   constructor(query, queryStr) {
     this.query = query
@@ -7,7 +7,7 @@ class APIFeatures {
   }
 
   /**
-   * @desc Search for a document.
+   * @desc Search for a documents.
    * @returns document of query instance that matches keyword or all document if no keyword.
    */
   search() {
@@ -36,6 +36,7 @@ class APIFeatures {
     this.query = this.query.find(JSON.parse(queryStr))
     return this
   }
+
 
   pagination(resPerPage) {
     const currentPage = Number(this.queryStr.page) || 1
