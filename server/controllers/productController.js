@@ -14,14 +14,19 @@ exports.newProduct = catchAsync(async (req, res, next) => {
 })
 
 /**
- * @method GET /api/v1/products?keyword=value
+ * @method GET /api/v1/products?keyword=value&field[lte]=value
  * @desc Get all products
- * @param {String} keyword
+ * @param {String} keyword -search: keyword to search for items
+ * @param {String/Integer} fields -filter: fields to filter
+ * @param {Integer} page -pagination: to show the page
  */
 exports.getProducts = catchAsync(async (req, res, next) => {
-  const apiFeature = new APIFeatures(Product, req.query)
-  const products = await apiFeature.search()
-  res.status(200).json({ success: true, products })
+  const resPerPage = 4
+  const totalCount = await Product.countDocuments()
+
+  const apiFeature = new APIFeatures(Product.find(), req.query)
+  const products = await apiFeature.search().filter().pagination(resPerPage).query
+  res.status(200).json({ success: true, count: products.length, totalCount, products })
 })
 
 /**
