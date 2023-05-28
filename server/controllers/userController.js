@@ -134,6 +134,17 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 })
 
 /**
+ * @desc Get current user profile detail
+ */
+exports.getUserProfile = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id)
+  if (!user) {
+    return next(new ErrorHandler("User not found", 404))
+  }
+  res.status(200).json({ success: true, user })
+})
+
+/**
  * @desc Lout out user by clearing cookies
  * @method POST /api/v1/user/logout
  */

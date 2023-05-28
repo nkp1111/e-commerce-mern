@@ -8,7 +8,9 @@ const { getProducts, newProduct, getSingleProduct, updateProducts, deleteProduct
 router.route("/products").get(getProducts)
 router.route("/product/:id").get(getSingleProduct)
 
-router.route("/admin/product/new").post(isAuthenticatedUser, authorizedRoles("admin"), newProduct)
+router.route("/admin/product/new")
+  .post(isAuthenticatedUser, authorizedRoles("admin"), newProduct)
+
 router.route("/admin/product/:id")
   .put(isAuthenticatedUser, authorizedRoles("admin"), updateProducts)
   .delete(isAuthenticatedUser, authorizedRoles("admin"), deleteProduct)
