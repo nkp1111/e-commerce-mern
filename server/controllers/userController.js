@@ -219,3 +219,27 @@ exports.logoutUser = catchAsync(async (req, res, next) => {
 
   res.status(200).json({ success: true, message: "Successfully Logged Out" })
 })
+
+
+/**
+ * @desc Get All users -admin route
+ * @method GET /api/v1/admin/users
+ */
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+  const users = await User.find()
+  res.status(200).json({ success: true, users })
+})
+
+
+/**
+ * @desc Get User Detail -admin route
+ * @method GET /api/v1/admin/user/:id
+ * @param {String} id = id of the user to retrieve info
+ */
+exports.getUserDetails = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id)
+  if (!user) {
+    return next(new ErrorHandler("User not found", 404))
+  }
+  res.status(200).json({ success: true, user })
+})
