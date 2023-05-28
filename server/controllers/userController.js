@@ -188,7 +188,7 @@ exports.getUserProfile = catchAsync(async (req, res, next) => {
  */
 exports.updateUserProfile = catchAsync(async (req, res, next) => {
   const { name, email } = req.body
-  const UpdatedInfo = {
+  const updatedInfo = {
     name,
     email
   }
@@ -197,7 +197,7 @@ exports.updateUserProfile = catchAsync(async (req, res, next) => {
   // update user info
   const user = await User.findByIdAndUpdate(
     req.user.id,
-    UpdatedInfo,
+    updatedInfo,
     {
       new: true,
       runValidators: true
@@ -221,6 +221,8 @@ exports.logoutUser = catchAsync(async (req, res, next) => {
 })
 
 
+//// admin routes /////
+
 /**
  * @desc Get All users -admin route
  * @method GET /api/v1/admin/users
@@ -242,4 +244,49 @@ exports.getUserDetails = catchAsync(async (req, res, next) => {
     return next(new ErrorHandler("User not found", 404))
   }
   res.status(200).json({ success: true, user })
+})
+
+
+/**
+ * @desc Update user profile detail by admin
+ * @method PUT /api/v1/admin/user/:id
+ * @param {String} name
+ * @param {String} email
+ * @param {String} role
+ */
+exports.updateUser = catchAsync(async (req, res, next) => {
+  let { name, email, role } = req.body
+
+  const updatedInfo = {}
+  if (name) updatedInfo["name"] = name
+  if (email) updatedInfo["email"] = email
+  if (role) updatedInfo["role"] = role
+
+  // update user info
+  const user = await User.findByIdAndUpdate(
+    req.params.id,
+    updatedInfo,
+    {
+      new: true,
+      runValidators: true
+    })
+
+  res.status(200).json({ success: true, user })
+})
+
+
+/**
+ * @desc Delete a user by admin
+ * @method DELETE /api/v1/admin/user/:id
+ */
+exports.deleteUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id)
+  if (!user) {
+    return next(new ErrorHandler("User not found", 404))
+  }
+
+  // remove avatar from cloudinary
+
+  await user.deleteOne()
+  res.status(200).json({ success: true })
 })
