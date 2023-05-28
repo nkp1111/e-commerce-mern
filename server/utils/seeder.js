@@ -1,4 +1,5 @@
 const Product = require("../models/product")
+// const User = require("../models/user")
 
 require("dotenv").config({ path: "server/config/config.env" })
 const connectDatabase = require("../config/database")
@@ -12,6 +13,11 @@ const seedProducts = async () => {
   try {
     await Product.deleteMany()
     console.log("products deleted")
+    // // add user to all seed products 
+    // const user = await User.findOne()
+    // product = product.map(product => {
+    //   product.user = user._id
+    // })
     await Product.create(product)
     console.log("products created")
   } catch (error) {
