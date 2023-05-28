@@ -2,11 +2,11 @@ const ErrorHandler = require("../utils/errorHandler")
 
 module.exports = (err, req, res, next) => {
 
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV.trim() === "development") {
     res.status(err.statusCode || 500).json({
       success: false,
       message: err.message || "Internal Server Error",
-      stack: err,
+      stack: err.stack,
     })
   }
   else {
