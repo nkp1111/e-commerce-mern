@@ -181,6 +181,33 @@ exports.getUserProfile = catchAsync(async (req, res, next) => {
 
 
 /**
+ * @desc Update current user profile detail
+ * @method PUT /api/v1/me/update
+ * @param {String} name
+ * @param {String} email
+ */
+exports.updateUserProfile = catchAsync(async (req, res, next) => {
+  const { name, email } = req.body
+  const UpdatedInfo = {
+    name,
+    email
+  }
+  // image to do 
+
+  // update user info
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    UpdatedInfo,
+    {
+      new: true,
+      runValidators: true
+    })
+
+  res.status(200).json({ success: true, user })
+})
+
+
+/**
  * @desc Lout out user by clearing cookies
  * @method POST /api/v1/user/logout
  */
