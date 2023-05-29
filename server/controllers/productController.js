@@ -75,3 +75,48 @@ exports.deleteProduct = catchAsync(async (req, res, next) => {
   await product.deleteOne({ _id: req.params.id })
   res.status(200).json({ success: true, message: "Product deleted" })
 })
+
+
+//// review routes /////
+
+/**
+ * @method POST /api/v1/product/:id/review
+ * @desc Create a review or update old review
+ */
+exports.createProductReview = catchAsync(async (req, res, next) => {
+  // find product by id
+  const { rating, comment } = req.body
+  const product = await Product.findById(req.params.id)
+
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404))
+  }
+
+  const review = {
+    user: req.user._id,
+    name: req.user.name,
+    rating: Number(rating),
+    comment,
+    date: Date.now()
+  }
+
+  const isReviewed = product.reviews.find(r => r?.user?.toString() === req.user._id.toString())
+
+  if (isReviewed) {
+    product.reviews.forEach(review => {
+      if (review.user.toString() === req.user._id.toString()) {
+        r.rating = Number(rating)
+        r.comment = comment
+        date = Date.now()
+      }
+    })
+  } else {
+    product.reviews.push(review)
+    product.numOfReviews = product.reviews.length
+  }
+
+  product.ratings = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.numOfReviews
+
+  await product.save({ validateBeforeSave: false })
+  res.status(200).json({ success: true })
+})

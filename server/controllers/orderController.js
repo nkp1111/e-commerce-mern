@@ -87,6 +87,7 @@ exports.getAllOrders = catchAsync(async (req, res, next) => {
 /**
  * @desc Update order - admin route
  * @method PUT /api/v1/admin/order/:id
+ * note: this method needs improvement
  */
 exports.updateOrder = catchAsync(async (req, res, next) => {
   const order = await Order.findById(req.params.id)
@@ -108,16 +109,6 @@ exports.updateOrder = catchAsync(async (req, res, next) => {
 })
 
 
-async function updateStock(id, quantity) {
-  const product = await Product.findById(id)
-  if (product.stock > quantity) {
-    product.stock -= quantity
-    await product.save({ validateBeforeSave: false })
-  }
-}
-
-
-
 /**
  * @desc Delete order - admin route
  * @method DELETE /api/v1/admin/order/:id
@@ -132,3 +123,18 @@ exports.deleteOrder = catchAsync(async (req, res, next) => {
 
   res.status(200).json({ success: true })
 })
+
+
+/**
+ * @desc Update product stocks 
+ * @param {String} id - product id to update 
+ * @param {Number} quantity - quantity to update 
+ * note: this method is used to update the order in 'updateOrder' method defined
+ */
+async function updateStock(id, quantity) {
+  const product = await Product.findById(id)
+  if (product.stock > quantity) {
+    product.stock -= quantity
+    await product.save({ validateBeforeSave: false })
+  }
+}
