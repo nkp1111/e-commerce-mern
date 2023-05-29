@@ -65,3 +65,70 @@ exports.getMyOrder = catchAsync(async (req, res, next) => {
 
   res.status(200).json({ success: true, orders })
 })
+
+
+//// admin routes ////
+
+/**
+ * @desc Get all orders - admin route
+ * @method GET /api/v1/admin/orders
+ */
+exports.getAllOrders = catchAsync(async (req, res, next) => {
+
+  let totalPrice = 0
+  const orders = await Order.find()
+
+  orders.forEach(order => totalPrice += order.totalPrice)
+
+  res.status(200).json({ success: true, totalPrice, orders })
+})
+
+
+/**
+ * @desc Update order - admin route
+ * @method PUT /api/v1/admin/order/:id
+ */
+exports.updateOrder = catchAsync(async (req, res, next) => {
+  const order = await Order.findById(req.params.id)
+  // if order item is already delivered
+  if (order.orderStatus === "delivered") {
+    return next(new ErrorHandler("Order is already delivered", 400))
+  }
+
+  // update each order item
+  order.orderItems.forEach(async (item) => {
+    await updateStock(item.product, item.quantity)
+  })
+
+  order.orderStatus = req.body.status
+  order.paidAt = Date.now()
+  await order.save()
+
+  res.status(200).json({ success: true })
+})
+
+
+async function updateStock(id, quantity) {
+  const product = await Product.findById(id)
+  if (product.stock > quantity) {
+    product.stock -= quantity
+    await product.save({ validateBeforeSave: false })
+  }
+}
+
+
+
+/**
+ * @desc Delete order - admin route
+ * @method DELETE /api/v1/admin/order/:id
+ */
+exports.deleteOrder = catchAsync(async (req, res, next) => {
+  const order = await Order.findById(req.params.id)
+
+  if (!order) {
+    return next(new ErrorHandler("Order not found for this id", 400))
+  }
+  await order.deleteOne()
+
+  res.status(200).json({ success: true })
+})
