@@ -1,10 +1,12 @@
 import React from 'react'
 import './App.css';
 
+import { Header } from './component'
+
 const App = () => {
   return (
     <div>
-      <h1 className='text-center'>E-commerce Mern</h1>
+      <Header />
     </div>
   )
 }
