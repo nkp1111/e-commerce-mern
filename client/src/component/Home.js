@@ -1,8 +1,11 @@
 import React from 'react'
 
+import MetaData from './layout/MetaData'
+
 const Home = () => {
   return (
-    <div className='container'>
+    <>
+      <MetaData title="Buy Best Online Items" />
       <h1 id="products_heading">Latest Products</h1>
 
       <section id="products" className="container mt-5">
@@ -32,7 +35,7 @@ const Home = () => {
         </div>
 
       </section>
-    </div>
+    </>
   )
 }
 
