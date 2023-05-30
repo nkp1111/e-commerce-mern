@@ -120,3 +120,37 @@ exports.createProductReview = catchAsync(async (req, res, next) => {
   await product.save({ validateBeforeSave: false })
   res.status(200).json({ success: true })
 })
+
+
+/**
+ * @desc Get all product reviews
+ * @method GET /api/v1/product/:id/review
+ */
+exports.getProductAllReviews = catchAsync(async (req, res, next) => {
+  const product = await Product.findById(req.params.id)
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404))
+  }
+  res.status(200).json({ success: true, reviews: product.reviews })
+})
+
+
+/**
+ * @desc Delete a product review
+ * @method DELETE /api/v1/product/:id/review/:reviewId
+ */
+exports.deleteProductReview = catchAsync(async (req, res, next) => {
+  let product = await Product.findById(req.params.id)
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404))
+  }
+
+  const reviews = product.reviews.filter(review => review._id.toString() !== req.params.reviewId.toString())
+
+  await Product.findByIdAndUpdate(req.params.id, { reviews }, {
+    new: true,
+    // runValidators: true
+  })
+
+  res.status(200).json({ success: true })
+})
