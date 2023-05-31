@@ -5,6 +5,7 @@ import { Header, Footer, Home } from './component'
 import './App.css';
 
 const App = () => {
+
   return (
     <Router>
       <div className='App'>
