@@ -18,7 +18,7 @@ const seedProducts = async () => {
     // product = product.map(product => {
     //   product.user = user._id
     // })
-    await Product.create(product)
+    await Product.create(product, { validateBeforeSave: false })
     console.log("products created")
   } catch (error) {
     console.log(error)

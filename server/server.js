@@ -4,7 +4,7 @@ const databaseConnection = require("./config/database")
 // setting up config file path
 require("dotenv").config({ path: "server/config/config.env" })
 
-const port = process.env.PORT
+const port = process.env.PORT || 4000
 
 // handle uncaught exceptions
 process.on("uncaughtException", err => {

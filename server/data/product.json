@@ -37,7 +37,7 @@
     "images": [
       {
         "public_id": "67890",
-        "url": "https://source.unsplash.com/random/?samsungtv"
+        "url": "https://source.unsplash.com/random/?samsung-tv"
       }
     ],
     "category": "Electronics",
@@ -61,7 +61,7 @@
     "images": [
       {
         "public_id": "24680",
-        "url": "https://source.unsplash.com/random/?leathersofa"
+        "url": "https://source.unsplash.com/random/?leather-sofa"
       }
     ],
     "category": "Furniture",
@@ -97,7 +97,7 @@
     "images": [
       {
         "public_id": "13579",
-        "url": "https://source.unsplash.com/random/?nikeairmax"
+        "url": "https://source.unsplash.com/random/?nike"
       }
     ],
     "category": "Sports",
@@ -127,7 +127,7 @@
     "images": [
       {
         "public_id": "24680",
-        "url": "https://source.unsplash.com/random/?amazonechodot"
+        "url": "https://source.unsplash.com/random/?amazon-speaker"
       }
     ],
     "category": "Electronics",
@@ -144,7 +144,7 @@
     "images": [
       {
         "public_id": "35791",
-        "url": "https://source.unsplash.com/random/?canonrebelt"
+        "url": "https://source.unsplash.com/random/?canon-camera"
       }
     ],
     "category": "Electronics",
