@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { Header, Footer, Home } from './component'
+import { Toaster } from 'react-hot-toast'
 import './App.css';
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
   return (
     <Router>
       <div className='App'>
+        <Toaster />
         <Header />
         <div className="container">
           <Routes>
