@@ -1,1 +1,6 @@
-export { default as productReducer } from "./product"
+import { productReducer, productDetailReducer } from './product'
+
+export {
+  productReducer,
+  productDetailReducer,
+} 
