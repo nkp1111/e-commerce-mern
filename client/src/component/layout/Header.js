@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Link } from 'react-router-dom'
 
 import { images } from '../../assets'
 import Search from './search'
@@ -10,7 +10,9 @@ const Header = () => {
       <nav className="navbar row">
         <div className="col-12 col-md-3">
           <div className="navbar-brand">
-            <img src={images.logo} alt="logo" />
+            <Link to="/">
+              <img src={images.logo} alt="logo" />
+            </Link>
           </div>
         </div>
 
