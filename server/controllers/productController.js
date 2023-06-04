@@ -22,12 +22,12 @@ exports.newProduct = catchAsync(async (req, res, next) => {
  * @param {Integer} page -pagination: to show the page
  */
 exports.getProducts = catchAsync(async (req, res, next) => {
-  const resPerPage = 8
+  const resPerPage = 4
   const totalCount = await Product.countDocuments()
 
   const apiFeature = new APIFeatures(Product.find(), req.query)
   const products = await apiFeature.search().filter().pagination(resPerPage).query
-  res.status(200).json({ success: true, count: products.length, totalCount, products })
+  res.status(200).json({ success: true, count: products.length, totalCount, products, resPerPage })
 })
 
 /**
