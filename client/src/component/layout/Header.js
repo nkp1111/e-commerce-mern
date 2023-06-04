@@ -1,6 +1,8 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 
 import { images } from '../../assets'
+import Search from './search'
 
 const Header = () => {
   return (
@@ -13,22 +15,7 @@ const Header = () => {
         </div>
 
         <div className="col-12 col-md-6 mt-2 mt-md-0">
-          <div className="input-group">
-            <input
-              type="text"
-              id="search_field"
-              className="form-control"
-              placeholder="Enter Product Name ..."
-              aria-label="Username"
-              aria-describedby="search-icon"
-            />
-
-            <div className="input-group-append" id="search-icon">
-              <button id="search_btn" className="btn">
-                <i className="fa fa-search" aria-hidden="true"></i>
-              </button>
-            </div>
-          </div>
+          <Search />
         </div>
 
         <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">

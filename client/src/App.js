@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { Header, Footer, Home } from './component'
+import { Header, Footer, Home, ProductDetail } from './component'
 import { Toaster } from 'react-hot-toast'
 import './App.css';
 
@@ -15,6 +15,8 @@ const App = () => {
         <div className="container">
           <Routes>
             <Route path='/' element={<Home />} exact />
+            <Route path='/search/:keyword' element={<Home />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
           </Routes>
         </div>
         <Footer />
