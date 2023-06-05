@@ -17,6 +17,19 @@ const Home = () => {
   const { error, loading, products, productCount, resPerPage } = useSelector((state) => state.product)
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([1, 1000]);
+  const [category, setCategory] = useState("");
+  const [rating, setRating] = useState(0);
+
+  const categories = [
+    "Electronics",
+    "Furniture",
+    "Clothing",
+    "Books",
+    "Music",
+    "Sports",
+    "Foods",
+    "Beauty/Healthcare",
+  ]
 
   const changeCurrentPageNum = (pageNumber) => {
     setCurrentPage(pageNumber)
@@ -30,8 +43,8 @@ const Home = () => {
       toast(`Error: ${error}`)
       return
     }
-    dispatch(getAllProducts(keyword, currentPage, price))
-  }, [currentPage, dispatch, error, keyword, price])
+    dispatch(getAllProducts(keyword, currentPage, price, category, rating))
+  }, [category, currentPage, dispatch, error, keyword, price, rating])
 
   return (
     <>
@@ -59,6 +72,44 @@ const Home = () => {
                             value={price}
                             onChange={setPrice}
                           />
+
+                          <hr className='my-5' />
+
+                          <div className="mt-5">
+                            <h4 className="mb-3">Categories</h4>
+                            <ul className="mx-0">
+                              {categories.map(category => {
+                                return (
+                                  <li key={category} className="list-group-item"
+                                    style={{ cursor: "pointer" }}
+                                    onClick={(e) => setCategory(category)}>
+                                    {category}
+                                  </li>
+                                )
+                              })}
+                            </ul>
+                          </div>
+
+                          <hr className='my-3' />
+
+                          <div className="mt-5">
+                            <h4 className="mb-3">Ratings</h4>
+                            <ul className="mx-0">
+                              {[5, 4, 3, 2, 1].map(rate => {
+                                return (
+                                  <li key={rate} className="list-group-item"
+                                    style={{ cursor: "pointer" }}
+                                    onClick={(e) => setRating(rate)}>
+                                    <div className="rating-outer">
+                                      <div className="rating-inner"
+                                        style={{ width: `${rate / 5 * 100}%` }}></div>
+                                    </div>
+                                  </li>
+                                )
+                              })}
+                            </ul>
+                          </div>
+
                         </div>
                       </div>
 

@@ -194,7 +194,7 @@
     "name": "Adidas Ultraboost Shoes",
     "price": 179.99,
     "description": "Experience unmatched comfort with Adidas Ultraboost Shoes.",
-    "ratings": 4.5,
+    "ratings": 5,
     "images": [
       {
         "public_id": "57931",
@@ -220,7 +220,7 @@
     "reviews": [
       {
         "name": "Robert Anderson",
-        "rating": 4,
+        "rating": 5,
         "comment": "Great shoes for running. Very comfortable!",
         "date": "2023-05-25T08:50:00.000Z"
       }

@@ -25,9 +25,20 @@ exports.getProducts = catchAsync(async (req, res, next) => {
   const resPerPage = 4
   const totalCount = await Product.countDocuments()
 
-  const apiFeature = new APIFeatures(Product.find(), req.query)
-  const products = await apiFeature.search().filter().pagination(resPerPage).query
-  res.status(200).json({ success: true, count: products.length, totalCount, products, resPerPage })
+  let apiFeature = new APIFeatures(Product.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resPerPage)
+
+  let products = await apiFeature.query
+
+  res.status(200)
+    .json({
+      success: true,
+      totalCount,
+      products,
+      resPerPage,
+    })
 })
 
 /**
