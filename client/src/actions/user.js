@@ -1,10 +1,10 @@
-const {
+import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   CLEAR_ERRORS,
-} = require("../constants/user")
-const axios = require("axios")
+} from "../constants/user"
+import axios from 'axios'
 
 
 export const login = (email, password) => async (dispatch) => {
@@ -17,7 +17,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     }
     const { data } = await axios.post(
-      "api/v1/user/login",
+      "/api/v1/user/login",
       { email, password },
       config,
     )
@@ -27,7 +27,7 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
-      payload: error,
+      payload: error.message,
     })
   }
 }
