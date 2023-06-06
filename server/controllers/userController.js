@@ -1,4 +1,5 @@
 const crypto = require("crypto")
+const cloudinary = require("cloudinary").v2
 
 const User = require("../models/user")
 
@@ -18,13 +19,21 @@ const sendEmail = require("../utils/sendEmail")
  */
 exports.registerUser = catchAsync(async (req, res, next) => {
   const { name, email, password, image } = req.body
+
+  const imgResult = await cloudinary.uploader
+    .upload(image, {
+      folder: "e-commerce",
+      width: 150,
+      crop: true,
+    })
+
   const user = await User.create({
     name,
     email,
     password,
     avatar: {
-      public_id: "Auth-app/en7jry5hrfndezuqynyp",
-      url: "https://res.cloudinary.com/dxvkq8yw6/image/upload/v1683097350/Auth-app/en7jry5hrfndezuqynyp.jpg"
+      public_id: imgResult.public_id,
+      url: imgResult.secure_url,
     }
   })
 
