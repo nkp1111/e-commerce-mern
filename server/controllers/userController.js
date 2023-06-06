@@ -24,7 +24,7 @@ exports.registerUser = catchAsync(async (req, res, next) => {
     .upload(image, {
       folder: "e-commerce",
       width: 150,
-      crop: true,
+      crop: "scale",
     })
 
   const user = await User.create({

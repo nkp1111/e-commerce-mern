@@ -6,3 +6,4 @@ export { default as Home } from "./Home"
 export { default as ProductDetail } from "./product/productDetail"
 
 export { default as Login } from "./user/Login"
+export { default as Register } from "./user/Register"
