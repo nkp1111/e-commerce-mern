@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { Header, Footer, Home, ProductDetail, Login, Register } from './component'
 import { Toaster } from 'react-hot-toast'
+
+import { loadUser } from './actions/user'
+import store from './store'
 import './App.css';
 
 const App = () => {
+
+  useEffect(() => {
+    store.dispatch(loadUser())
+  }, []);
 
   return (
     <Router>
