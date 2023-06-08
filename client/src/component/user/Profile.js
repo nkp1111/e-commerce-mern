@@ -11,7 +11,7 @@ import { register, clearErrors } from '../../actions/user'
 const Profile = () => {
 
   const { user, loading } = useSelector((state) => state.user)
-  console.log(user)
+
   return (
     <>
       {loading ? <Loader /> : (

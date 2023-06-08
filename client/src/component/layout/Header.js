@@ -39,20 +39,18 @@ const Header = () => {
           {user
             ?
             <div class="ms-4 dropdown d-inline">
-              <button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="btn dropdown-toggle text-white me-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <figure className="avatar avatar-nav">
-                  <img src={user.avatar && user.avatar.url} alt={user.name} className='rounded-circle' />
+                  <img src={user?.avatar && user?.avatar.url} alt={user?.name} className='rounded-circle' />
                 </figure>
-                <span>{user.name}</span>
+                <span>{user?.name}</span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
                 {
                   user && user.role !== "admin"
                     ? <Link to="/orders/me" className='dropdown-item'>Orders</Link>
                     : <Link to="/dashboard" className='dropdown-item'>Dashboard</Link>
                 }
-
                 <Link to="/me" className='dropdown-item'>Profile</Link>
                 <Link className='dropdown-item text-danger' onClick={logoutHandler}>
                   Logout
