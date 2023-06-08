@@ -47,7 +47,7 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
-      payload: error.message,
+      payload: error.response.data.message,
     })
   }
 }
@@ -73,7 +73,7 @@ export const register = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: REGISTER_FAIL,
-      payload: error.message,
+      payload: error.response.data.message,
     })
   }
 }
@@ -101,12 +101,39 @@ export const updateProfile = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_PROFILE_FAIL,
-      payload: error.message,
+      payload: error.response.data.message,
     })
   }
 }
 
+// update password
+export const updatePassword = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PASSWORD_REQUEST })
 
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+
+    const { data } = await axios.put(
+      "/api/v1/password/update",
+      userData,
+      config,
+    )
+
+    dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success })
+
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PASSWORD_FAIL,
+      payload: error.response.data.message,
+    })
+  }
+}
+
+// get current user 
 export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST })
@@ -118,11 +145,12 @@ export const loadUser = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOAD_USER_FAIL,
-      payload: error.message,
+      payload: error.response.data.message,
     })
   }
 }
 
+// logout current user
 export const logout = () => async (dispatch) => {
   try {
 
@@ -130,7 +158,10 @@ export const logout = () => async (dispatch) => {
     dispatch({ type: LOGOUT_SUCCESS })
 
   } catch (error) {
-    dispatch({ type: LOGOUT_FAIL, payload: error.message })
+    dispatch({
+      type: LOGOUT_FAIL,
+      payload: error.response.data.message
+    })
   }
 }
 

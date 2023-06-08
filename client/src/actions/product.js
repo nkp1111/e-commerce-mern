@@ -31,7 +31,7 @@ export const getAllProducts = (keyword = "", currentPage = 1, price, category, r
   } catch (error) {
     dispatch({
       type: ALL_PRODUCT_FAIL,
-      payload: error.message
+      payload: error.response.data.message,
     })
   }
 }
@@ -59,7 +59,7 @@ export const getProductDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAIL_FAIL,
-      payload: error.message
+      payload: error.response.data.message,
     })
   }
 }

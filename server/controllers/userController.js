@@ -167,7 +167,7 @@ exports.updateUserPassword = catchAsync(async (req, res, next) => {
   }
   // if password and confirm password are not same
   if (password !== confirmPassword) {
-    return next(new ErrorHandler("Password Not Matched", 404))
+    return next(new ErrorHandler("Password and confirmPassword are not same", 404))
   }
 
   user.password = password
