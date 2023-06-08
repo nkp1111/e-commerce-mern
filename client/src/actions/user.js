@@ -23,6 +23,10 @@ import {
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_FAIL,
 
+  PASSWORD_RESET_REQUEST,
+  PASSWORD_RESET_SUCCESS,
+  PASSWORD_RESET_FAIL,
+
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
 
@@ -163,6 +167,36 @@ export const forgotPassword = (email) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FORGOT_PASSWORD_FAIL,
+      payload: error.response.data.message,
+    })
+  }
+}
+
+// reset password
+export const resetPassword = (token, passwords) => async (dispatch) => {
+  try {
+    dispatch({ type: PASSWORD_RESET_REQUEST })
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+
+    const { data } = await axios.post(
+      "/api/v1/password/reset/" + token,
+      passwords,
+      config,
+    )
+
+    dispatch({
+      type: PASSWORD_RESET_SUCCESS,
+      payload: data.success
+    })
+
+  } catch (error) {
+    dispatch({
+      type: PASSWORD_RESET_FAIL,
       payload: error.response.data.message,
     })
   }

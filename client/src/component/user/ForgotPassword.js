@@ -23,8 +23,6 @@ const ForgotPassword = () => {
       return
     }
 
-    console.log(message)
-
     if (message) {
       toast.success(message)
     }

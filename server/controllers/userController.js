@@ -85,7 +85,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const resetToken = user.getResetPasswordToken()
   await user.save({ validateBeforeSave: false })
 
-  const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`
+  const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`
   const message = `
   You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
   Please click on the following link to reset your password:\n\n

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { Header, Footer, Home, ProductDetail, Login, Register, Profile, UpdateProfile, UpdatePassword, ForgotPassword, ProtectedRoute } from './component'
+import { Header, Footer, Home, ProductDetail, Login, Register, Profile, UpdateProfile, UpdatePassword, ForgotPassword, ResetPassword, ProtectedRoute } from './component'
 import { Toaster } from 'react-hot-toast'
 
 import { loadUser } from './actions/user'
@@ -46,9 +46,11 @@ const App = () => {
                 <ProtectedRoute>
                   <UpdatePassword />
                 </ProtectedRoute>
-              } />
+              } exact />
 
-            <Route path="/password/forgot" element={<ForgotPassword />} />
+            <Route path="/password/forgot" element={<ForgotPassword />} exact />
+
+            <Route path="/password/reset/:token" element={<ResetPassword />} />
 
           </Routes>
         </div>

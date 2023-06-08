@@ -25,6 +25,10 @@ const {
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_FAIL,
 
+  PASSWORD_RESET_REQUEST,
+  PASSWORD_RESET_SUCCESS,
+  PASSWORD_RESET_FAIL,
+
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
 
@@ -142,6 +146,7 @@ export const forgotPasswordReducer = (state = { user: {} }, action) => {
   switch (action.type) {
 
     case FORGOT_PASSWORD_REQUEST:
+    case PASSWORD_RESET_REQUEST:
       return {
         ...state,
         loading: true,
@@ -155,8 +160,15 @@ export const forgotPasswordReducer = (state = { user: {} }, action) => {
         message: action.payload,
       }
 
+    case PASSWORD_RESET_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      }
 
     case FORGOT_PASSWORD_FAIL:
+    case PASSWORD_RESET_FAIL:
       return {
         ...state,
         loading: false,
