@@ -4,13 +4,14 @@ import thunk from "redux-thunk"
 
 import {
   productReducer, productDetailReducer,
-  userReducer,
+  userReducer, userProfileReducer,
 } from './reducers'
 
 const reducer = combineReducers({
   product: productReducer,
   productDetail: productDetailReducer,
   user: userReducer,
+  userProfile: userProfileReducer,
 })
 
 const initialState = {}

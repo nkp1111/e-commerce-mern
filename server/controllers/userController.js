@@ -196,12 +196,30 @@ exports.getUserProfile = catchAsync(async (req, res, next) => {
  * @param {String} email
  */
 exports.updateUserProfile = catchAsync(async (req, res, next) => {
-  const { name, email } = req.body
+  const { name, email, image } = req.body
   const updatedInfo = {
     name,
     email
   }
+
   // image to do 
+  if (image) {
+    const user = await User.findById(req.user.id)
+    const imageId = user.avatar.public_id
+    const res = await cloudinary.uploader.destroy(imageId)
+
+    const imgResult = await cloudinary.uploader
+      .upload(image, {
+        folder: "e-commerce",
+        width: 150,
+        crop: "scale",
+      })
+
+    updatedInfo.avatar = {
+      public_id: imgResult.public_id,
+      url: imgResult.secure_url,
+    }
+  }
 
   // update user info
   const user = await User.findByIdAndUpdate(

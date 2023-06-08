@@ -1,8 +1,9 @@
 import { productReducer, productDetailReducer } from './product'
-import { userReducer } from './user'
+import { userReducer, userProfileReducer } from './user'
 
 export {
   productReducer,
   productDetailReducer,
   userReducer,
+  userProfileReducer,
 } 
