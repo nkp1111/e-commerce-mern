@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, Routes, Link } from 'react-router-dom'
+import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import toast from 'react-hot-toast'
 
@@ -9,11 +9,13 @@ import { logout } from '../../actions/user'
 
 const Header = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { loading, user } = useSelector((state) => state.user)
 
   const logoutHandler = () => {
     dispatch(logout())
     toast.success("User Logged out Successfully.")
+    navigate("/")
   }
 
   return (

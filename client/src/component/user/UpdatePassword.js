@@ -89,7 +89,7 @@ const UpdatePassword = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn update-btn btn-block mt-4 mb-3">Update Password</button>
+                <button type="submit" className="btn update-btn w-100 mt-4 mb-3">Update Password</button>
               </form>
             </div>
           </div>
