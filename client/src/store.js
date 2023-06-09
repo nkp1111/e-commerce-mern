@@ -5,6 +5,7 @@ import thunk from "redux-thunk"
 import {
   productReducer, productDetailReducer,
   userReducer, userProfileReducer, forgotPasswordReducer,
+  cartReducer,
 } from './reducers'
 
 const reducer = combineReducers({
@@ -13,9 +14,16 @@ const reducer = combineReducers({
   user: userReducer,
   userProfile: userProfileReducer,
   forgotPassword: forgotPasswordReducer,
+  cart: cartReducer,
 })
 
-const initialState = {}
+const initialState = {
+  cart: {
+    cartItems: localStorage.getItem('cartItems')
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : []
+  }
+}
 
 const store = configureStore({
   reducer,

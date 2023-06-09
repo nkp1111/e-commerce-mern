@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { getProductDetails } from '../../actions/product'
@@ -8,7 +8,11 @@ import toast from 'react-hot-toast'
 import { Carousel } from 'react-bootstrap'
 import MetaData from '../layout/MetaData'
 
+import { addItemsToCart } from "../../actions/cart";
+
 const Detail = () => {
+
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams()
 
   const { error, loading, product } = useSelector(store => store.productDetail)
@@ -23,6 +27,27 @@ const Detail = () => {
 
   if (error) {
     toast(`Error: ${error}`)
+  }
+
+  const addToCart = () => {
+    dispatch(addItemsToCart(id, quantity))
+    toast.success("Item added to cart")
+  }
+
+  const increaseQty = () => {
+    const count = document.querySelector(".count")
+    if (Number(count.value) >= product.quantity) return
+
+    const newQty = Number(count.value) + 1
+    setQuantity(newQty)
+  }
+
+  const decreaseQty = () => {
+    const count = document.querySelector(".count")
+    if (Number(count.value) <= 1) return
+
+    const newQty = Number(count.value) - 1
+    setQuantity(newQty)
   }
 
   return (
@@ -57,13 +82,14 @@ const Detail = () => {
 
               <p id="product_price">${product.price}</p>
               <div className="stockCounter d-inline">
-                <span className="btn btn-danger minus">-</span>
+                <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
 
-                <input type="number" className="form-control count d-inline" value="1" readOnly />
+                <input type="number" className="form-control count d-inline" value={quantity} readOnly />
 
-                <span className="btn btn-primary plus">+</span>
+                <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
               </div>
-              <button type="button" id="cart_btn" className="btn btn-primary d-inline ms-4">Add to Cart</button>
+              <button type="button" id="cart_btn" className="btn btn-primary d-inline ms-4"
+                disabled={product.stock === 0} onClick={addToCart}>Add to Cart</button>
 
               <hr />
 
