@@ -13,3 +13,5 @@ export { default as UpdateProfile } from "./user/UpdateProfile"
 export { default as UpdatePassword } from "./user/UpdatePassword"
 export { default as ForgotPassword } from "./user/ForgotPassword"
 export { default as ResetPassword } from "./user/NewPassword"
+
+export { default as Cart } from "./cart/cart"

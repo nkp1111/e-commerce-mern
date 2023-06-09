@@ -51,7 +51,7 @@ const Detail = () => {
   }
 
   return (
-    <div>
+    <>
       {!product ? <Loader /> : (
         <>
           <MetaData title={product.name} />
@@ -148,7 +148,7 @@ const Detail = () => {
           </div>
         </>
       )}
-    </div>
+    </>
   )
 }
 
