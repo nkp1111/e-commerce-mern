@@ -15,7 +15,7 @@ const ConfirmOrder = () => {
   const shippingPrice = itemPrice > 250 ? 0 : 25
   const taxPercent = 10
   const taxPrice = Number((taxPercent * itemPrice / 100).toFixed(2))
-  const totalPrice = itemPrice + shippingPrice + taxPrice
+  const totalPrice = Number((itemPrice + shippingPrice + taxPrice).toFixed(2))
 
 
   const proceedToPayment = () => {
@@ -28,14 +28,14 @@ const ConfirmOrder = () => {
 
     localStorage.setItem("orderInfo", JSON.stringify(data))
 
-    navigate("/")
+    navigate("/payment")
   }
 
   return (
     <>
       <MetaData title="Confirm Order" />
 
-      <CheckoutSteps confirmOrder={true} />
+      <CheckoutSteps shipping={true} confirmOrder={true} />
       <div className="row d-flex justify-content-between">
         <div className="col-12 col-lg-8 mt-5 order-confirm">
 

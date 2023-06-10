@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { Header, Footer, Home, ProductDetail, Login, Register, Profile, UpdateProfile, UpdatePassword, ForgotPassword, ResetPassword, Cart, ProtectedRoute, Shipping, ConfirmOrder } from './component'
+import { Header, Footer, Home, ProductDetail, Login, Register, Profile, UpdateProfile, UpdatePassword, ForgotPassword, ResetPassword, Cart, ProtectedRoute, Shipping, ConfirmOrder, Payment } from './component'
 import { Toaster } from 'react-hot-toast'
+import axios from 'axios'
+
+import { Elements } from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
 
 import { loadUser } from './actions/user'
 import store from './store'
@@ -10,8 +14,17 @@ import './App.css';
 
 const App = () => {
 
+  const [stripeApi, setStripeApi] = useState("");
+
   useEffect(() => {
     store.dispatch(loadUser())
+
+    async function getStripeApi() {
+      const { data } = await axios.get("/api/v1/stripe_api")
+      setStripeApi(data.apiKey)
+    }
+
+    getStripeApi()
   }, []);
 
   return (
@@ -69,8 +82,22 @@ const App = () => {
                 </ProtectedRoute>
               }
               exact />
-
           </Routes>
+
+
+          {stripeApi && (
+            <Elements stripe={loadStripe(stripeApi)}>
+              <Routes>
+                <Route path="/payment"
+                  element={
+                    <ProtectedRoute>
+                      <Payment />
+                    </ProtectedRoute>
+                  }
+                  exact />
+              </Routes>
+            </Elements>
+          )}
         </div>
         <Footer />
       </div>
