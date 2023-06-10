@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast'
@@ -7,6 +7,7 @@ import axios from 'axios'
 
 import MetaData from '../layout/MetaData'
 import CheckoutSteps from './CheckoutSteps'
+import { createOrder, clearErrors } from "../../actions/order"
 
 
 const options = {
@@ -29,13 +30,33 @@ const Payment = () => {
 
   const { user } = useSelector(state => state.user)
   const { cartItems, shippingInfo } = useSelector(state => state.cart)
+  const { error } = useSelector(state => state.order)
 
+  const order = {
+    orderItems: cartItems,
+    shippingInfo,
+  }
 
   const orderInfo = JSON.parse(localStorage.getItem("orderInfo"))
+  if (orderInfo) {
+    order.totalPrice = orderInfo.totalPrice
+    order.taxPrice = orderInfo.taxPrice
+    order.shippingPrice = orderInfo.shippingPrice
+    order.itemsPrice = orderInfo.itemsPrice
+  }
 
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice)
   }
+
+  useEffect(() => {
+
+    if (error) {
+      toast.error(error)
+      dispatch(clearErrors())
+      return
+    }
+  }, [dispatch, error]);
 
   const submitHandler = async (e) => {
     e.preventDefault()
@@ -74,8 +95,16 @@ const Payment = () => {
         toast.error(result.error.message)
         payBtn.disabled = false
       } else {
-        if (result.paymentIntent.state === "succeeded") {
+        if (result.paymentIntent.status === "succeeded") {
 
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          }
+
+          dispatch(createOrder(order))
+
+          toast.success("New order created")
 
           navigate("/success")
         } else {

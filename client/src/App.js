@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { Header, Footer, Home, ProductDetail, Login, Register, Profile, UpdateProfile, UpdatePassword, ForgotPassword, ResetPassword, Cart, ProtectedRoute, Shipping, ConfirmOrder, Payment } from './component'
+import { Header, Footer, Home, ProductDetail, Login, Register, Profile, UpdateProfile, UpdatePassword, ForgotPassword, ResetPassword, Cart, ProtectedRoute, Shipping, ConfirmOrder, Payment, OrderSuccess } from './component'
 import { Toaster } from 'react-hot-toast'
 import axios from 'axios'
 
@@ -79,6 +79,14 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <ConfirmOrder />
+                </ProtectedRoute>
+              }
+              exact />
+
+            <Route path="/success"
+              element={
+                <ProtectedRoute>
+                  <OrderSuccess />
                 </ProtectedRoute>
               }
               exact />
