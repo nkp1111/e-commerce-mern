@@ -15,3 +15,4 @@ export { default as ForgotPassword } from "./user/ForgotPassword"
 export { default as ResetPassword } from "./user/NewPassword"
 
 export { default as Cart } from "./cart/cart"
+export { default as Shipping } from "./cart/Shipping"

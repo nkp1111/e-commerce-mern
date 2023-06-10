@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast'
 
 import MetaData from '../layout/MetaData'
@@ -8,6 +8,7 @@ import { addItemsToCart, removeCartItem } from "../../actions/cart";
 
 const Cart = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { cartItems } = useSelector((state) => state.cart)
 
   const increaseQty = (item) => {
@@ -31,6 +32,11 @@ const Cart = () => {
   const removeCartItemHandler = (id) => {
     dispatch(removeCartItem(id))
     toast.success("Cart item removed")
+  }
+
+
+  const checkoutHandler = () => {
+    navigate("/login?redirect=shipping")
   }
 
   return (
@@ -92,7 +98,8 @@ const Cart = () => {
                   <p>Est. total: <span className="order-summary-values">${cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0).toFixed(2)}</span></p>
 
                   <hr />
-                  <button id="checkout_btn" className="btn btn-primary btn-block">Check out</button>
+                  <button id="checkout_btn" className="btn btn-primary w-100"
+                    onClick={checkoutHandler}>Check out</button>
                 </div>
               </div>
             </div>

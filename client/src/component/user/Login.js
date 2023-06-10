@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import toast from 'react-hot-toast'
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import Loader from '../layout/loader'
 import MetaData from '../layout/MetaData'
@@ -14,9 +14,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.user)
   const { loading, error, user, isAuthenticated } = userLogin
+
+  const redirect = location.search ? "/" + location.search.split("=")[1] : "/"
+  console.log(redirect, location.search)
 
   useEffect(() => {
     if (error) {
@@ -26,9 +30,9 @@ const Login = () => {
     }
 
     if (isAuthenticated) {
-      navigate("/")
+      navigate(redirect)
     }
-  }, [dispatch, error, isAuthenticated, navigate]);
+  }, [dispatch, error, isAuthenticated, navigate, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault()
