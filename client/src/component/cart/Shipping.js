@@ -6,6 +6,7 @@ import { countries } from 'countries-list'
 
 import MetaData from '../layout/MetaData'
 import { saveShippingInfo } from "../../actions/cart";
+import CheckoutSteps from './CheckoutSteps'
 
 const Shipping = () => {
 
@@ -31,6 +32,7 @@ const Shipping = () => {
   return (
     <>
       <MetaData title="Shipping" />
+      <CheckoutSteps shipping={true} />
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
           <form className="shadow-lg" onSubmit={submitHandler}>

@@ -16,3 +16,4 @@ export { default as ResetPassword } from "./user/NewPassword"
 
 export { default as Cart } from "./cart/cart"
 export { default as Shipping } from "./cart/Shipping"
+export { default as ConfirmOrder } from "./cart/ConfirmOrder"
