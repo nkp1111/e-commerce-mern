@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import toast from 'react-hot-toast'
-import { Link, useNavigate } from "react-router-dom";
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { Link } from "react-router-dom";
 
 import Loader from '../layout/loader'
 import MetaData from '../layout/MetaData'
 
-import { register, clearErrors } from '../../actions/user'
 
 const Profile = () => {
 

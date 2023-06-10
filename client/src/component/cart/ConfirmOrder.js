@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
-import toast from 'react-hot-toast'
-import { countries } from 'countries-list'
+// import toast from 'react-hot-toast'
 
 import MetaData from '../layout/MetaData'
-import { saveShippingInfo } from "../../actions/cart";
 import CheckoutSteps from './CheckoutSteps'
 
 const ConfirmOrder = () => {

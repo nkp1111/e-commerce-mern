@@ -223,7 +223,7 @@ export const loadUser = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
 
-    const { data } = await axios.post("/api/v1/user/logout")
+    await axios.post("/api/v1/user/logout")
     dispatch({ type: LOGOUT_SUCCESS })
 
   } catch (error) {

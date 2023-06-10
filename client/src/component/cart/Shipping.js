@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from "react-router-dom";
-import toast from 'react-hot-toast'
+import { useNavigate } from "react-router-dom";
+// import toast from 'react-hot-toast'
 import { countries } from 'countries-list'
 
 import MetaData from '../layout/MetaData'

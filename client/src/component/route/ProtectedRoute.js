@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 
 const ProtectedRoute = ({ children }) => {
 
-  const { loading, user, isAuthenticated } = useSelector((state) => state.user)
+  const { loading, isAuthenticated } = useSelector((state) => state.user)
   const navigate = useNavigate()
 
   if (!loading && !isAuthenticated) {

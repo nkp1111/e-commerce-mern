@@ -15,7 +15,7 @@ const Detail = () => {
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams()
 
-  const { error, loading, product } = useSelector(store => store.productDetail)
+  const { error, product } = useSelector(store => store.productDetail)
 
   const dispatch = useDispatch()
 
