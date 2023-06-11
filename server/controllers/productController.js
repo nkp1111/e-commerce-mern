@@ -111,13 +111,13 @@ exports.createProductReview = catchAsync(async (req, res, next) => {
     date: Date.now()
   }
 
-  const isReviewed = product.reviews.find(r => r?.user?.toString() === req.user._id.toString())
+  const isReviewed = product.reviews.find(r => r?.user?.toString() === req?.user?._id?.toString())
 
   if (isReviewed) {
     product.reviews.forEach(review => {
-      if (review.user.toString() === req.user._id.toString()) {
-        r.rating = Number(rating)
-        r.comment = comment
+      if (review?.user?.toString() === req.user._id.toString()) {
+        review.rating = Number(rating)
+        review.comment = comment
         date = Date.now()
       }
     })
