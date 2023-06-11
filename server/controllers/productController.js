@@ -165,3 +165,20 @@ exports.deleteProductReview = catchAsync(async (req, res, next) => {
 
   res.status(200).json({ success: true })
 })
+
+
+// admin routes
+/**
+ * @method GET /api/v1/admin/products
+ * @desc Get all products - admin routes
+ */
+exports.getAdminProducts = catchAsync(async (req, res, next) => {
+
+  const products = await Product.find()
+
+  res.status(200)
+    .json({
+      success: true,
+      products,
+    })
+})
