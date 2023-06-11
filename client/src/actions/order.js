@@ -7,6 +7,10 @@ import {
   MY_ORDER_SUCCESS,
   MY_ORDER_FAIL,
 
+  ORDER_DETAIL_REQUEST,
+  ORDER_DETAIL_SUCCESS,
+  ORDER_DETAIL_FAIL,
+
   CLEAR_ERROR,
 } from '../constants/order'
 import axios from 'axios'
@@ -24,10 +28,8 @@ export const createOrder = (order) => async (dispatch) => {
       }
     }
 
-    console.log("going to create order", order)
     const { data } = await axios.post("/api/v1/order/new", order, config)
 
-    console.log("after creating order", data)
     dispatch({
       type: CREATE_ORDER_SUCCESS,
       payload: data.order,
@@ -58,8 +60,6 @@ export const getMyOrders = () => async (dispatch) => {
 
     const { data } = await axios.get("/api/v1/order/me")
 
-    console.log("allOrders", data)
-
     dispatch({
       type: MY_ORDER_SUCCESS,
       payload: data.orders,
@@ -68,6 +68,29 @@ export const getMyOrders = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: MY_ORDER_FAIL,
+    })
+  }
+}
+
+
+export const getOrderDetails = (id) => async (dispatch) => {
+  try {
+
+    dispatch({
+      type: ORDER_DETAIL_REQUEST,
+    })
+
+    const { data } = await axios.get("/api/v1/order/" + id)
+
+    dispatch({
+      type: ORDER_DETAIL_SUCCESS,
+      payload: data.order,
+    })
+
+  } catch (error) {
+    dispatch({
+      type: ORDER_DETAIL_FAIL,
+      payload: error.response.data.message
     })
   }
 }

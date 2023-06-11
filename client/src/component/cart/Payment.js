@@ -113,8 +113,6 @@ const Payment = () => {
         }
       }
 
-
-
     } catch (error) {
       payBtn.disabled = false
       console.log(error)
@@ -161,7 +159,6 @@ const Payment = () => {
                 options={options}
               />
             </div>
-
 
             <button
               id="pay_btn"

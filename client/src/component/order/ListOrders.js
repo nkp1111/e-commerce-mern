@@ -50,7 +50,7 @@ const ListOrders = () => {
         },
         {
           label: "Actions",
-          field: "action",
+          field: "actions",
           sort: "asc"
         },
       ],

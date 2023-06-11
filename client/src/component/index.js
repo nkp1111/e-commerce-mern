@@ -21,3 +21,4 @@ export { default as Payment } from "./cart/Payment"
 export { default as OrderSuccess } from "./cart/orderSuccess"
 
 export { default as ListOrders } from "./order/ListOrders"
+export { default as DetailsOrder } from "./order/DetailOrder"
