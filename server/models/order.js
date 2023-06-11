@@ -10,19 +10,15 @@ const orderSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    state: {
-      type: String,
-      required: true,
-    },
     country: {
       type: String,
       required: true,
     },
-    zipCode: {
+    postalCode: {
       type: String,
       required: true,
     },
-    phoneNum: {
+    phoneNo: {
       type: String,
       required: true,
     },

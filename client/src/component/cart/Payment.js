@@ -42,7 +42,7 @@ const Payment = () => {
     order.totalPrice = orderInfo.totalPrice
     order.taxPrice = orderInfo.taxPrice
     order.shippingPrice = orderInfo.shippingPrice
-    order.itemsPrice = orderInfo.itemsPrice
+    order.itemsPrice = orderInfo.itemPrice
   }
 
   const paymentData = {
