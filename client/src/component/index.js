@@ -25,3 +25,4 @@ export { default as DetailsOrder } from "./order/DetailOrder"
 
 export { default as Dashboard } from "./admin/Dashboard"
 export { default as ProductList } from "./admin/ProductList"
+export { default as NewProduct } from "./admin/NewProduct"

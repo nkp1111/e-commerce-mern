@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { Header, Footer, Home, ProductDetail, Login, Register, Profile, UpdateProfile, UpdatePassword, ForgotPassword, ResetPassword, Cart, ProtectedRoute, Shipping, ConfirmOrder, Payment, OrderSuccess, ListOrders, DetailsOrder, Dashboard, ProductList } from './component'
+import { Header, Footer, Home, ProductDetail, Login, Register, Profile, UpdateProfile, UpdatePassword, ForgotPassword, ResetPassword, Cart, ProtectedRoute, Shipping, ConfirmOrder, Payment, OrderSuccess, ListOrders, DetailsOrder, Dashboard, ProductList, NewProduct, } from './component'
 import { Toaster } from 'react-hot-toast'
 import axios from 'axios'
 
@@ -10,6 +10,7 @@ import { loadStripe } from "@stripe/stripe-js"
 
 import { loadUser } from './actions/user'
 import store from './store'
+import { useSelector } from 'react-redux'
 import './App.css';
 
 const App = () => {
@@ -26,6 +27,8 @@ const App = () => {
 
     getStripeApi()
   }, []);
+
+  const { user } = useSelector(state => state.user)
 
   return (
     <Router>
@@ -141,8 +144,20 @@ const App = () => {
               </ProtectedRoute>
             }
             exact />
+
+          <Route path="/admin/product"
+            element={
+              <ProtectedRoute {...{ isAdmin: true }}>
+                <NewProduct />
+              </ProtectedRoute>
+            }
+            exact />
+
         </Routes>
-        <Footer />
+        {user && user.role !== "admin" && (
+          <Footer />
+        )}
+
       </div>
     </Router >
   )

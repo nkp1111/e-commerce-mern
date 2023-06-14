@@ -3,13 +3,34 @@ const Product = require("../models/product")
 const ErrorHandler = require("../utils/errorHandler")
 const catchAsync = require("../middleware/catchAsync")
 const APIFeatures = require("../utils/apiFeatures")
+const cloudinary = require("cloudinary").v2
 
 /**
- * @method POST /api/v1/product/new
+ * @method POST /api/v1/admin/product/new
  * @desc Creates a new product
  */
 exports.newProduct = catchAsync(async (req, res, next) => {
   req.body.user = req.user._id
+
+  let images = typeof req.body.images === "string"
+    ? [req.body.images]
+    : req.body.images
+
+  let imageLinks = []
+
+  for (let image of images) {
+    const result = await cloudinary.uploader.upload(image, {
+      folder: "e-commerce"
+    })
+
+    imageLinks.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    })
+  }
+
+  req.body.images = imageLinks
+
   const product = await Product.create(req.body)
   res.status(200).json({ success: true, product })
 })

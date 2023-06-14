@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import thunk from "redux-thunk"
 
 import {
-  productReducer, productDetailReducer, newReviewReducer,
+  productReducer, productDetailReducer, newReviewReducer, newProductReducer,
   userReducer, userProfileReducer, forgotPasswordReducer,
   cartReducer,
   newOrderReducer, myOrderReducer, orderDetailReducer,
@@ -20,6 +20,7 @@ const reducer = combineReducers({
   myOrders: myOrderReducer,
   orderDetail: orderDetailReducer,
   newReview: newReviewReducer,
+  newProduct: newProductReducer,
 })
 
 const initialState = {
