@@ -80,7 +80,40 @@ exports.getSingleProduct = catchAsync(async (req, res, next) => {
  */
 exports.updateProducts = catchAsync(async (req, res, next) => {
   // find product and update it
-  const product = await Product.findByIdAndUpdate(
+
+  let product = await Product.findById(req.params.id);
+
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404))
+  }
+
+  let images = typeof req.body.images === "string"
+    ? [req.body.images]
+    : req.body.images
+
+  if (images && images.length > 0) {
+    // delete image from cloudinary
+    for (let image of product.images) {
+      const result = await cloudinary.uploader.destroy(image.public_id)
+    }
+
+    let imageLinks = []
+
+    for (let image of images) {
+      const result = await cloudinary.uploader.upload(image, {
+        folder: "e-commerce"
+      })
+
+      imageLinks.push({
+        public_id: result.public_id,
+        url: result.secure_url,
+      })
+    }
+
+    req.body.images = imageLinks
+  }
+
+  product = await Product.findByIdAndUpdate(
     req.params.id,
     req.body,
     { new: true, runValidators: true }

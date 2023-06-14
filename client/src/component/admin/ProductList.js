@@ -101,6 +101,7 @@ const ProductList = () => {
 
   return (
     <>
+      <MetaData title="All Products" />
       <div className="row">
         <div className="col-12 col-md-2">
           <Sidebar />

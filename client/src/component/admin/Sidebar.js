@@ -14,7 +14,10 @@ const sidebar = () => {
 
           <li>
             <a href="#productSubmenu" data-bs-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
-              <i className="fa fa-product-hunt"></i> Products</a>
+              <i className="fa fa-product-hunt"></i>
+              Products
+              <i class="ms-3 fa-sharp fa-solid fa-caret-down"></i>
+            </a>
             <ul className="collapse list-unstyled" id="productSubmenu">
               <li>
                 <Link to="/admin/products"><i className="fa fa-clipboard-list"></i> All</Link>
