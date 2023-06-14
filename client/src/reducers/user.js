@@ -33,8 +33,17 @@ const {
   ALL_USER_SUCCESS,
   ALL_USER_FAIL,
 
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_RESET,
+  UPDATE_USER_FAIL,
+
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
+
+  USER_DETAIL_REQUEST,
+  USER_DETAIL_SUCCESS,
+  USER_DETAIL_FAIL,
 
   CLEAR_ERRORS,
 } = require("../constants/user")
@@ -106,6 +115,7 @@ export const userProfileReducer = (state = { user: {} }, action) => {
 
     case UPDATE_PROFILE_REQUEST:
     case UPDATE_PASSWORD_REQUEST:
+    case UPDATE_USER_REQUEST:
       return {
         ...state,
         loading: true,
@@ -113,6 +123,7 @@ export const userProfileReducer = (state = { user: {} }, action) => {
 
     case UPDATE_PROFILE_SUCCESS:
     case UPDATE_PASSWORD_SUCCESS:
+    case UPDATE_USER_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -121,6 +132,7 @@ export const userProfileReducer = (state = { user: {} }, action) => {
 
     case UPDATE_PROFILE_RESET:
     case UPDATE_PASSWORD_RESET:
+    case UPDATE_USER_RESET:
       return {
         ...state,
         isUploaded: false,
@@ -128,6 +140,7 @@ export const userProfileReducer = (state = { user: {} }, action) => {
 
     case UPDATE_PROFILE_FAIL:
     case UPDATE_PASSWORD_FAIL:
+    case UPDATE_USER_FAIL:
       return {
         ...state,
         loading: false,
@@ -210,6 +223,43 @@ export const allUserReducer = (state = { users: [] }, action) => {
 
 
     case ALL_USER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      }
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null
+      }
+
+    default:
+      return state
+  }
+}
+
+
+
+export const userDetailReducer = (state = { users: {} }, action) => {
+
+  switch (action.type) {
+    case USER_DETAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      }
+
+    case USER_DETAIL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload,
+      }
+
+
+    case USER_DETAIL_FAIL:
       return {
         ...state,
         loading: false,

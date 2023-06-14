@@ -31,6 +31,14 @@ import {
   ALL_USER_SUCCESS,
   ALL_USER_FAIL,
 
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAIL,
+
+  USER_DETAIL_REQUEST,
+  USER_DETAIL_SUCCESS,
+  USER_DETAIL_FAIL,
+
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
 
@@ -256,6 +264,53 @@ export const allUsers = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ALL_USER_FAIL,
+      payload: error.response.data.message,
+    })
+  }
+}
+
+
+export const updateUser = (id, userData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_USER_REQUEST })
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+
+    const { data } = await axios.put(
+      "/api/v1/admin/user/" + id,
+      userData,
+      config,
+    )
+
+    dispatch({
+      type: UPDATE_USER_SUCCESS,
+      payload: data.success,
+    })
+
+  } catch (error) {
+    dispatch({
+      type: UPDATE_USER_FAIL,
+      payload: error.response.data.message,
+    })
+  }
+}
+
+
+export const getUserDetail = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_DETAIL_REQUEST })
+
+    const { data } = await axios.get("/api/v1/admin/user/" + id)
+
+    dispatch({ type: USER_DETAIL_SUCCESS, payload: data.user })
+
+  } catch (error) {
+    dispatch({
+      type: USER_DETAIL_FAIL,
       payload: error.response.data.message,
     })
   }

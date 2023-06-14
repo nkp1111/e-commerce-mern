@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { Header, Footer, Home, ProductDetail, Login, Register, Profile, UpdateProfile, UpdatePassword, ForgotPassword, ResetPassword, Cart, ProtectedRoute, Shipping, ConfirmOrder, Payment, OrderSuccess, ListOrders, DetailsOrder, Dashboard, ProductList, NewProduct, UpdateProduct, OrderList, ProcessOrder, UserList } from './component'
+import { Header, Footer, Home, ProductDetail, Login, Register, Profile, UpdateProfile, UpdatePassword, ForgotPassword, ResetPassword, Cart, ProtectedRoute, Shipping, ConfirmOrder, Payment, OrderSuccess, ListOrders, DetailsOrder, Dashboard, ProductList, NewProduct, UpdateProduct, OrderList, ProcessOrder, UserList, UpdateUser, } from './component'
 import { Toaster } from 'react-hot-toast'
 import axios from 'axios'
 
@@ -181,6 +181,14 @@ const App = () => {
             element={
               // <ProtectedRoute {...{ isAdmin: true }}>
               <UserList />
+              // </ProtectedRoute>
+            }
+            exact />
+
+          <Route path="/admin/user/:id"
+            element={
+              // <ProtectedRoute {...{ isAdmin: true }}>
+              <UpdateUser />
               // </ProtectedRoute>
             }
             exact />

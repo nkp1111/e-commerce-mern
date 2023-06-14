@@ -76,9 +76,11 @@ const UserList = () => {
           <Link to={`/admin/user/${user._id}`} className='btn btn-primary py-1 px-2'>
             <i className="fa fa-pencil"></i>
           </Link>
-          {/* <button className="btn btn-danger py-1 px-2 ms-2" disabled={loading} onClick={() => deleteUserHandler(user._id)}>
+          <button className="btn btn-danger py-1 px-2 ms-2" disabled={loading}
+          // onClick={() => deleteUserHandler(user._id)}
+          >
             <i className="fa fa-trash"></i>
-          </button> */}
+          </button>
         </>
       })
     })
