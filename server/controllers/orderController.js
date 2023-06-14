@@ -133,7 +133,8 @@ exports.deleteOrder = catchAsync(async (req, res, next) => {
  */
 async function updateStock(id, quantity) {
   const product = await Product.findById(id)
-  if (product.stock > quantity) {
+
+  if (product?.stock || 0 > quantity) {
     product.stock -= quantity
     await product.save({ validateBeforeSave: false })
   }

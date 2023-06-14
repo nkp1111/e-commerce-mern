@@ -11,6 +11,15 @@ import {
   ORDER_DETAIL_SUCCESS,
   ORDER_DETAIL_FAIL,
 
+  ALL_ORDER_REQUEST,
+  ALL_ORDER_SUCCESS,
+  ALL_ORDER_FAIL,
+
+  UPDATE_ORDER_REQUEST,
+  UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_FAIL,
+  UPDATE_ORDER_RESET,
+
   CLEAR_ERROR,
 } from '../constants/order'
 import axios from 'axios'
@@ -93,4 +102,56 @@ export const getOrderDetails = (id) => async (dispatch) => {
       payload: error.response.data.message
     })
   }
+}
+
+export const getAllOrders = () => async (dispatch) => {
+  try {
+
+    dispatch({
+      type: ALL_ORDER_REQUEST
+    })
+
+    const { data } = await axios.get("/api/v1/admin/orders")
+
+    dispatch({
+      type: ALL_ORDER_SUCCESS,
+      payload: data,
+    })
+
+  } catch (error) {
+    dispatch({
+      type: ALL_ORDER_FAIL,
+      payload: error.response.data.message,
+    })
+  }
+}
+
+
+export const updateOrder = (id, orderData) => async (dispatch) => {
+
+  try {
+    dispatch({
+      type: UPDATE_ORDER_REQUEST,
+    })
+
+    const config = {
+      headers: {
+        "content-type": "application/json",
+      }
+    }
+
+    const { data } = await axios.put("/api/v1/admin/order/" + id, orderData, config)
+
+    dispatch({
+      type: UPDATE_ORDER_SUCCESS,
+      payload: data.success,
+    })
+
+  } catch (error) {
+    dispatch({
+      type: UPDATE_ORDER_FAIL,
+      payload: error.response.data.message,
+    })
+  }
+
 }

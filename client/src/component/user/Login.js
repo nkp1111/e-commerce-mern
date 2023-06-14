@@ -20,7 +20,6 @@ const Login = () => {
   const { loading, error, isAuthenticated } = userLogin
 
   const redirect = location.search ? "/" + location.search.split("=")[1] : "/"
-  console.log(redirect, location.search)
 
   useEffect(() => {
     if (error) {
