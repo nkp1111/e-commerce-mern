@@ -313,6 +313,8 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
   }
 
   // remove avatar from cloudinary
+  const imageId = user.avatar.public_id
+  const result = await cloudinary.uploader.destroy(imageId)
 
   await user.deleteOne()
   res.status(200).json({ success: true })

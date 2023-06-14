@@ -7,14 +7,14 @@ import { MDBDataTable } from "mdbreact"
 import MetaData from "../layout/MetaData";
 import Loader from '../layout/loader'
 import Sidebar from "./Sidebar"
-import { clearErrors, allUsers } from '../../actions/user'
-import { DELETE_ORDER_RESET } from '../../constants/order'
+import { clearErrors, allUsers, deleteUser } from '../../actions/user'
+import { USER_DELETE_RESET } from '../../constants/user'
 
 const UserList = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { loading, error, users } = useSelector(state => state.allUser)
-  const { error: orderError, isDeleted } = useSelector(state => state.orderChange)
+  const { error: deleteError, isDeleted } = useSelector(state => state.userProfile)
 
   useEffect(() => {
     dispatch(allUsers())
@@ -25,14 +25,20 @@ const UserList = () => {
       return
     }
 
-    // if (isDeleted) {
-    //   toast.success("Successfully deleted order")
-    //   navigate("/admin/orders")
-    //   dispatch({
-    //     type: DELETE_ORDER_RESET
-    //   })
-    // }
-  }, [dispatch, error, isDeleted, navigate]);
+    if (deleteError) {
+      toast.error(deleteError)
+      dispatch(clearErrors())
+      return
+    }
+
+    if (isDeleted) {
+      toast.success("Successfully deleted user")
+      navigate("/admin/users")
+      dispatch({
+        type: USER_DELETE_RESET
+      })
+    }
+  }, [deleteError, dispatch, error, isDeleted, navigate]);
 
   const setUsers = () => {
     const data = {
@@ -77,7 +83,7 @@ const UserList = () => {
             <i className="fa fa-pencil"></i>
           </Link>
           <button className="btn btn-danger py-1 px-2 ms-2" disabled={loading}
-          // onClick={() => deleteUserHandler(user._id)}
+            onClick={() => deleteUserHandler(user._id)}
           >
             <i className="fa fa-trash"></i>
           </button>
@@ -89,9 +95,9 @@ const UserList = () => {
   }
 
 
-  // const deleteUserHandler = (id) => {
-  //   dispatch(deleteOrder(id))
-  // }
+  const deleteUserHandler = (id) => {
+    dispatch(deleteUser(id))
+  }
 
   return (
     <>

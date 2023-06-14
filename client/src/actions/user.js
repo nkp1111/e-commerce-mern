@@ -39,6 +39,11 @@ import {
   USER_DETAIL_SUCCESS,
   USER_DETAIL_FAIL,
 
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
+  USER_DELETE_RESET,
+
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
 
@@ -311,6 +316,23 @@ export const getUserDetail = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_DETAIL_FAIL,
+      payload: error.response.data.message,
+    })
+  }
+}
+
+
+export const deleteUser = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_DELETE_REQUEST })
+
+    const { data } = await axios.delete("/api/v1/admin/user/" + id)
+
+    dispatch({ type: USER_DELETE_SUCCESS, payload: data.success })
+
+  } catch (error) {
+    dispatch({
+      type: USER_DELETE_FAIL,
       payload: error.response.data.message,
     })
   }
