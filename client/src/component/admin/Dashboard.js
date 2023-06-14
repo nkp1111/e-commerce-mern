@@ -7,12 +7,14 @@ import Loader from '../layout/loader'
 import Sidebar from "./Sidebar"
 import { getAdminProducts, clearErrors } from '../../actions/product'
 import { getAllOrders } from '../../actions/order'
+import { allUsers } from '../../actions/user'
 
 const Dashboard = () => {
   const dispatch = useDispatch()
 
   const { products } = useSelector(store => store.product)
   const { orders, totalAmount, loading } = useSelector(state => state.allOrder)
+  const { users } = useSelector(state => state.allUser)
 
   let outOfStock = 0
   products.forEach(product => {
@@ -24,6 +26,7 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getAdminProducts())
     dispatch(getAllOrders())
+    dispatch(allUsers())
   }, [dispatch]);
 
   return (
@@ -81,7 +84,7 @@ const Dashboard = () => {
             <div className="col-xl-3 col-sm-6 mb-3">
               <div className="card text-white bg-info o-hidden h-100">
                 <div className="card-body">
-                  <div className="text-center card-font-size">Users<br /> <b>45</b></div>
+                  <div className="text-center card-font-size">Users<br /> <b>{users?.length || 0}</b></div>
                 </div>
                 <Link className="card-footer text-white clearfix small z-1" href="/admin/users">
                   <span className="float-start">View Details</span>

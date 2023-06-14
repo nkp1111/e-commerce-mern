@@ -27,6 +27,10 @@ import {
   PASSWORD_RESET_SUCCESS,
   PASSWORD_RESET_FAIL,
 
+  ALL_USER_REQUEST,
+  ALL_USER_SUCCESS,
+  ALL_USER_FAIL,
+
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
 
@@ -238,4 +242,21 @@ export const clearErrors = async (dispatch) => {
   dispatch({
     type: CLEAR_ERRORS
   })
+}
+
+
+export const allUsers = () => async (dispatch) => {
+  try {
+    dispatch({ type: ALL_USER_REQUEST })
+
+    const { data } = await axios.get("/api/v1/admin/users")
+
+    dispatch({ type: ALL_USER_SUCCESS, payload: data })
+
+  } catch (error) {
+    dispatch({
+      type: ALL_USER_FAIL,
+      payload: error.response.data.message,
+    })
+  }
 }

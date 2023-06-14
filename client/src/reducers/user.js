@@ -29,6 +29,10 @@ const {
   PASSWORD_RESET_SUCCESS,
   PASSWORD_RESET_FAIL,
 
+  ALL_USER_REQUEST,
+  ALL_USER_SUCCESS,
+  ALL_USER_FAIL,
+
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
 
@@ -169,6 +173,43 @@ export const forgotPasswordReducer = (state = { user: {} }, action) => {
 
     case FORGOT_PASSWORD_FAIL:
     case PASSWORD_RESET_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      }
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null
+      }
+
+    default:
+      return state
+  }
+}
+
+
+export const allUserReducer = (state = { users: [] }, action) => {
+
+  switch (action.type) {
+    case ALL_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      }
+
+    case ALL_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: action.payload.success,
+        users: action.payload.users,
+      }
+
+
+    case ALL_USER_FAIL:
       return {
         ...state,
         loading: false,

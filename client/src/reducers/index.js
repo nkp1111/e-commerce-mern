@@ -1,5 +1,5 @@
 import { productReducer, productDetailReducer, newReviewReducer, newProductReducer, productChangeReducer } from './product'
-import { userReducer, userProfileReducer, forgotPasswordReducer } from './user'
+import { userReducer, userProfileReducer, forgotPasswordReducer, allUserReducer } from './user'
 import { cartReducer } from './cart'
 import { newOrderReducer, myOrderReducer, orderDetailReducer, allOrderReducer, orderChangeReducer } from './order'
 
@@ -18,4 +18,5 @@ export {
   productChangeReducer,
   allOrderReducer,
   orderChangeReducer,
+  allUserReducer,
 } 
