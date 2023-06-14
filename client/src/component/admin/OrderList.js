@@ -4,17 +4,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import toast from 'react-hot-toast'
 import { MDBDataTable } from "mdbreact"
 
-
 import MetaData from "../layout/MetaData";
 import Loader from '../layout/loader'
 import Sidebar from "./Sidebar"
-import { clearErrors, getAllOrders } from '../../actions/order'
-import { DELETE_PRODUCT_RESET } from '../../constants/product'
+import { clearErrors, deleteOrder, getAllOrders } from '../../actions/order'
+import { DELETE_ORDER_RESET } from '../../constants/order'
 
 const OrderList = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { loading, error, orders, totalAmount } = useSelector(state => state.allOrder)
+  const { error: orderError, isDeleted } = useSelector(state => state.orderChange)
 
   useEffect(() => {
     dispatch(getAllOrders())
@@ -25,15 +25,14 @@ const OrderList = () => {
       return
     }
 
-
-    // if (isDeleted) {
-    //   toast.success("Successfully deleted product")
-    //   navigate("/admin/products")
-    //   dispatch({
-    //     type: DELETE_PRODUCT_RESET
-    //   })
-    // }
-  }, [dispatch, error]);
+    if (isDeleted) {
+      toast.success("Successfully deleted order")
+      navigate("/admin/orders")
+      dispatch({
+        type: DELETE_ORDER_RESET
+      })
+    }
+  }, [dispatch, error, isDeleted, navigate]);
 
   const setOrders = () => {
     const data = {
@@ -79,7 +78,7 @@ const OrderList = () => {
           <Link to={`/admin/order/${order._id}`} className='btn btn-primary py-1 px-2'>
             <i className="fa fa-eye"></i>
           </Link>
-          <button className="btn btn-danger py-1 px-2 ms-2" disabled={loading}>
+          <button className="btn btn-danger py-1 px-2 ms-2" disabled={loading} onClick={() => deleteOrderHandler(order._id)}>
             <i className="fa fa-trash"></i>
           </button>
         </>
@@ -90,9 +89,9 @@ const OrderList = () => {
   }
 
 
-  // const productDeleteHandler = (id) => {
-  //   dispatch(deleteProduct(id))
-  // }
+  const deleteOrderHandler = (id) => {
+    dispatch(deleteOrder(id))
+  }
 
   return (
     <>
