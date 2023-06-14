@@ -97,11 +97,17 @@ exports.updateProducts = catchAsync(async (req, res, next) => {
  * @desc Delete a product
  */
 exports.deleteProduct = catchAsync(async (req, res, next) => {
+
   // find product by id
   const product = await Product.findById(req.params.id)
   // if product not found 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404))
+  }
+
+  // delete image from cloudinary
+  for (let image of product.images) {
+    const result = await cloudinary.uploader.destroy(image.public_id)
   }
   // delete product if exists
   await product.deleteOne({ _id: req.params.id })
