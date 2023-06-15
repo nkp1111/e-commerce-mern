@@ -7,8 +7,8 @@ import { MDBDataTable } from "mdbreact"
 import MetaData from "../layout/MetaData";
 import Loader from '../layout/loader'
 import Sidebar from "./Sidebar"
-import { clearErrors, getProductReviews } from '../../actions/product'
-import { GET_REVIEW_RESET } from '../../constants/product'
+import { clearErrors, getProductReviews, deleteProductReview } from '../../actions/product'
+import { DELETE_REVIEW_RESET } from '../../constants/product'
 
 const ProductReview = () => {
 
@@ -19,6 +19,7 @@ const ProductReview = () => {
   // const { loading, error, users } = useSelector(state => state.allUser)
   // const { error: deleteError, isDeleted } = useSelector(state => state.userProfile)
   const { error, reviews, loading } = useSelector(state => state.productReview)
+  const { isDeleted, error: deleteError } = useSelector(state => state.deleteReview)
 
   useEffect(() => {
 
@@ -28,18 +29,24 @@ const ProductReview = () => {
       return
     }
 
+    if (deleteError) {
+      toast.error(deleteError)
+      dispatch(clearErrors())
+      return
+    }
+
     if (productId !== "") {
       dispatch(getProductReviews(productId))
     }
 
-    // if (isDeleted) {
-    //   toast.success("Successfully deleted user")
-    //   navigate("/admin/users")
-    //   dispatch({
-    //     type: GET_REVIEW_RESET
-    //   })
-    // }
-  }, [dispatch, error, navigate, productId]);
+    if (isDeleted) {
+      toast.success("Successfully deleted product review")
+      navigate("/admin/reviews")
+      dispatch({
+        type: DELETE_REVIEW_RESET
+      })
+    }
+  }, [deleteError, dispatch, error, isDeleted, navigate, productId]);
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -86,7 +93,7 @@ const ProductReview = () => {
         user: review.name,
         actions: <>
           <button className="btn btn-danger py-1 px-2 ms-2" disabled={loading}
-          // onClick={() => deleteUserHandler(review._id)}
+            onClick={() => deleteUserHandler(productId, review._id)}
           >
             <i className="fa fa-trash"></i>
           </button>
@@ -98,9 +105,9 @@ const ProductReview = () => {
   }
 
 
-  // const deleteUserHandler = (id) => {
-  //   dispatch(deleteUser(id))
-  // }
+  const deleteUserHandler = (productId, reviewId) => {
+    dispatch(deleteProductReview(productId, reviewId))
+  }
 
   return (
     <>

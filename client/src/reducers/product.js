@@ -36,6 +36,11 @@ import {
   GET_REVIEW_FAIL,
   GET_REVIEW_RESET,
 
+  DELETE_REVIEW_REQUEST,
+  DELETE_REVIEW_SUCCESS,
+  DELETE_REVIEW_FAIL,
+  DELETE_REVIEW_RESET,
+
   CLEAR_ERRORS,
 } from '../constants/product'
 
@@ -253,7 +258,6 @@ export const productChangeReducer = (state = {}, action) => {
 export const productReviewReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_REVIEW_REQUEST:
-      // case UPDATE_PRODUCT_REQUEST:
       return {
         ...state,
         loading: true,
@@ -266,32 +270,57 @@ export const productReviewReducer = (state = {}, action) => {
         reviews: action.payload,
       }
 
-    // case UPDATE_PRODUCT_SUCCESS:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     isUpdated: action.payload,
-    //   }
-
     case GET_REVIEW_FAIL:
-      // case UPDATE_PRODUCT_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
       }
 
-    case GET_REVIEW_RESET:
+    // case GET_REVIEW_RESET:
+    //   return {
+    //     ...state,
+    //     isDeleted: false,
+    //   }
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      }
+
+    default:
+      return state;
+  }
+}
+
+export const deleteReviewReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DELETE_REVIEW_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      }
+
+    case DELETE_REVIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isDeleted: action.payload,
+      }
+
+    case DELETE_REVIEW_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      }
+
+    case DELETE_REVIEW_RESET:
       return {
         ...state,
         isDeleted: false,
       }
-
-    // case UPDATE_PRODUCT_RESET:
-    //   return {
-    //     ...state,
-    //     isUpdated: false,
-    //   }
 
     case CLEAR_ERRORS:
       return {
