@@ -29,6 +29,11 @@ import {
   UPDATE_PRODUCT_SUCCESS,
   UPDATE_PRODUCT_FAIL,
 
+  GET_REVIEW_REQUEST,
+  GET_REVIEW_SUCCESS,
+  GET_REVIEW_FAIL,
+  GET_REVIEW_RESET,
+
   CLEAR_ERRORS,
 } from '../constants/product'
 
@@ -218,6 +223,35 @@ export const updateProduct = (id, productData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_PRODUCT_FAIL,
+      payload: error.response.data.message
+    })
+  }
+}
+
+
+export const getProductReviews = (id) => async (dispatch) => {
+  try {
+
+    dispatch({
+      type: GET_REVIEW_REQUEST,
+    })
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }
+
+    const { data } = await axios.get("/api/v1/product/" + id + "/review", config)
+
+    dispatch({
+      type: GET_REVIEW_SUCCESS,
+      payload: data.reviews,
+    })
+
+  } catch (error) {
+    dispatch({
+      type: GET_REVIEW_FAIL,
       payload: error.response.data.message
     })
   }
